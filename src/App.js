@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      Club Penguin
+      Club Penguin rocks
     </div>
   );
 }
