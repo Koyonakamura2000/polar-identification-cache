@@ -3,6 +3,8 @@ import PrivacyPolicy from './PrivacyPolicy';
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import TripList from './TripList';
+import PhotoUpload from './PhotoUpload';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJpWqNM-NPGFCr_BFoRVycsAi093ySP0Q",
@@ -17,15 +19,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const dataRef = collection(db, 'data');
-loadData(dataRef);
+// loadData(dataRef);
 
 const storage = getStorage(app);
 
 async function loadData(ref) {
   const dataSnapshot = await getDocs(ref);
-  console.log(dataSnapshot);
   const dataList = dataSnapshot.docs.map(doc => doc.data());
-  console.log(dataList);
 }
 
 /* 
@@ -52,12 +52,29 @@ const testTrips = [{"startLocation":"Longyearbyen, Svalbard","endLocation":"Reyk
 
 const testGeolocation = {'latitude': [59, 73.1], 'longitude': [-142, 12]};
 
+// returns [lat, long] based on boundaries set in testGeolocation
+export function generateRandomLatLong() {
+  let randomLatitude = testGeolocation['latitude'][0] + Math.random()*(testGeolocation['latitude'][1] - testGeolocation['latitude'][0]);
+  let randomLongitude = testGeolocation['longitude'][0] + Math.random()*(testGeolocation['longitude'][1] - testGeolocation['longitude'][0]);
+  return [randomLatitude, randomLongitude];
+}
 
+for(let i = 0; i < 5; i++) {
+  console.log(generateRandomLatLong());
+}
+
+// v1 flow: privacy policy -> add photos -> randomly generate location
+// eventually, it should first allow the user to choose the trip they went on and if the photo timestamps don't match with the tour dates, reject or reformat (quality control)
 function App() {
   return (
     <div className="App">
       <PrivacyPolicy />
-      Club Penguin
+      <h1>Club Penguin</h1>
+      <section className='uploadFlow'>
+        {/* In live version the trip will be used to associate each photo timestamp with the corresponding geolocation */}
+        <TripList />
+        <PhotoUpload />
+      </section>
     </div>
   );
 }
