@@ -5,6 +5,7 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import TripList from './TripList';
 import PhotoUpload from './PhotoUpload';
+import Download from './Download';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJpWqNM-NPGFCr_BFoRVycsAi093ySP0Q",
@@ -17,16 +18,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const dataRef = collection(db, 'data');
+export const db = getFirestore(app);
 // loadData(dataRef);
 
-const storage = getStorage(app);
-
-async function loadData(ref) {
-  const dataSnapshot = await getDocs(ref);
-  const dataList = dataSnapshot.docs.map(doc => doc.data());
-}
+export const storage = getStorage(app);
 
 /* 
 
@@ -59,10 +54,6 @@ export function generateRandomLatLong() {
   return [randomLatitude, randomLongitude];
 }
 
-for(let i = 0; i < 5; i++) {
-  console.log(generateRandomLatLong());
-}
-
 // v1 flow: privacy policy -> add photos -> randomly generate location
 // eventually, it should first allow the user to choose the trip they went on and if the photo timestamps don't match with the tour dates, reject or reformat (quality control)
 function App() {
@@ -75,6 +66,7 @@ function App() {
         <TripList />
         <PhotoUpload />
       </section>
+      <Download />
     </div>
   );
 }
