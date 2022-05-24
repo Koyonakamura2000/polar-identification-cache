@@ -43,42 +43,12 @@ function DataId() {
         return json;
     }
 
-    // function updateDatabase(e) {
-    //     e.preventDefault();
-    //     console.log(this);
-    //     const radios = document.getElementById(this).getElementsBy
-    // }
-
     return (
         <>
             <div>Data ID</div>
             <button onClick={getData}>Get Uncategorized Photos</button>
             <div className='dataid-grid'>
                 {data.map((docInfo) => (
-                    // <div key={docInfo['id']} id={docInfo['id']}>
-                    //     <img src={docInfo['image']} alt='Uncategorized Animal' />
-                    //     <div>
-                    //         <h4>Identify the animal</h4>
-                    //         <form onSubmit={updateDatabase.bind(docInfo['id'])}>
-                    //             <div>
-                    //                 <input type="radio" name="species" value='Unknown' defaultChecked />
-                    //                 <label>Unknown</label>
-                    //             </div>
-                    //             {docInfo['idAry'].map((id, i) => 
-                    //                 <div key={i}>
-                    //                     <input type="radio" name="species" value={id} />
-                    //                     <label>{id}</label>
-                    //                 </div>
-                    //             )}
-                    //             <div>
-                    //                 <input type="radio" name="species" value='Other (type below)' />
-                    //                 <label>Other</label>
-                    //             </div>
-                    //             <input type='text' name='other' />
-                    //             <input type='submit' />
-                    //         </form>
-                    //     </div>
-                    // </div>
                     <UncategorizedAnimal key={docInfo['id']} info={docInfo} />
                 ))}
             </div>
