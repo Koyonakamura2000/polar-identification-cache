@@ -19,7 +19,7 @@ function PhotoUpload() {
             picReader.addEventListener('load', (event) => {
                 let picFile = event.target;
                 let location = generateRandomLatLong();
-                let newContribution = {'id': 'image' + i, 'image': picFile.result, 'date': date, 'species': 'Ursus Maritimus', 'latitude': location[0], 'longitude': location[1]};        
+                let newContribution = {'id': 'image' + i, 'image': picFile.result, 'date': date, 'species': 'Unknown', 'latitude': location[0], 'longitude': location[1]}; // species Unknown as default        
                 setContributions(prevState => {
                     return [...prevState, newContribution];
                 });
@@ -37,7 +37,7 @@ function PhotoUpload() {
     async function handleSubmit(e) {
         e.preventDefault();
         for(let i = 0; i < contributions.length; i++) {
-            let imgPath = contributions[i]['species'].replace(/\s+/g, '') + '/' + uuidv4();
+            let imgPath = uuidv4();
             const imgRef = ref(storage, imgPath);
             await uploadString(imgRef, contributions[i]['image'], 'data_url').then((snapshot) => console.log('uploaded image!'));
             let imgUrl = '';
