@@ -1,0 +1,9 @@
+.dataid-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+}
+
+.dataid-grid img {
+    max-width: 100%;
+}

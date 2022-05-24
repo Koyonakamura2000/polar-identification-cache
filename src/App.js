@@ -6,6 +6,7 @@ import { getStorage } from "firebase/storage";
 import TripList from './TripList';
 import PhotoUpload from './PhotoUpload';
 import Download from './Download';
+import DataId from './DataId';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJpWqNM-NPGFCr_BFoRVycsAi093ySP0Q",
@@ -19,7 +20,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-// loadData(dataRef);
 
 export const storage = getStorage(app);
 
@@ -67,6 +67,7 @@ function App() {
         <PhotoUpload />
       </section>
       <Download />
+      <DataId />
     </div>
   );
 }
