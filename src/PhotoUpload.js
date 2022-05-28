@@ -53,7 +53,7 @@ function PhotoUpload() {
     }
     
     return (
-        <>
+        <section className='default-section'>
             <h1>Add Photos</h1>
             <form id='photo-upload' method='post' onSubmit={e => handleSubmit(e)}>
                 <label htmlFor='photos'>Select multiple photos: </label>
@@ -72,7 +72,7 @@ function PhotoUpload() {
                 </div>
                 <button id='submit' type='submit'>Submit</button>
             </form>
-        </>
+        </section>
     );
 }
 

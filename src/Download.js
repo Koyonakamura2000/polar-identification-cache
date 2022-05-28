@@ -28,7 +28,10 @@ function Download() {
     }
 
     return (
-        <button onClick={downloadCsv}>Download</button>
+        <>
+            <h1>Download Photos</h1>
+            <button onClick={downloadCsv}>Download</button>
+        </>
     );
 }
 

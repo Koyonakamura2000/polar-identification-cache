@@ -1,6 +1,12 @@
+import Download from './Download';
+import DataId from './DataId';
+
 function DataView() {
     return (
-        <div>Data View</div>
+        <section className="default-section">
+            <Download />
+            <DataId />
+        </section>
     );
 }
 
