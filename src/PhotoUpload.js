@@ -54,7 +54,7 @@ function PhotoUpload() {
     
     return (
         <>
-            <h2>Add Photos</h2>
+            <h1>Add Photos</h1>
             <form id='photo-upload' method='post' onSubmit={e => handleSubmit(e)}>
                 <label htmlFor='photos'>Select multiple photos: </label>
                 <input id='photos' type='file' multiple onChange={addMultiple} />

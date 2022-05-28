@@ -1,12 +1,9 @@
 import './App.css';
-import PrivacyPolicy from './PrivacyPolicy';
 import { initializeApp } from "firebase/app";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import TripList from './TripList';
-import PhotoUpload from './PhotoUpload';
-import Download from './Download';
-import DataId from './DataId';
+import { Link, Outlet } from 'react-router-dom';
+import picLogo from './images/pic-logo.png';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJpWqNM-NPGFCr_BFoRVycsAi093ySP0Q",
@@ -22,26 +19,6 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 export const storage = getStorage(app);
-
-/* 
-
-In case we need to make different test data
-
-const locations = ['Reykjavik, Iceland', 'Oslo, Norway', 'Kangerlussuaq, Greenland', 'Longyearbyen, Svalbard', 'Tromso, Norway'];
-const times = [['01/02/2020', '01/09/2020'], ['01/02/2020', '01/15/2020'], ['02/02/2020', '02/15/2020'], ['01/13/2021', '01/24/2021'], ['02/24/2022', '03/05/2022']];
-let testTrips = [];
-for(let i = 0; i < 10; i++) {
-  let mockTrip = {};
-  mockTrip['startLocation'] = locations[Math.floor(Math.random() * locations.length)];
-  mockTrip['endLocation'] = locations[Math.floor(Math.random() * locations.length)];
-  const mockTimes = times[Math.floor(Math.random() * times.length)];
-  mockTrip['startTime'] = mockTimes[0];
-  mockTrip['endTime'] = mockTimes[1];
-  testTrips.push(mockTrip);
-}
-console.log(testTrips);
-console.log(JSON.stringify(testTrips));
-*/
 
 const testTrips = [{"startLocation":"Longyearbyen, Svalbard","endLocation":"Reykjavik, Iceland","startTime":"02/02/2020","endTime":"02/15/2020"},{"startLocation":"Longyearbyen, Svalbard","endLocation":"Tromso, Norway","startTime":"02/02/2020","endTime":"02/15/2020"},{"startLocation":"Longyearbyen, Svalbard","endLocation":"Reykjavik, Iceland","startTime":"01/13/2021","endTime":"01/24/2021"},{"startLocation":"Oslo, Norway","endLocation":"Kangerlussuaq, Greenland","startTime":"02/24/2022","endTime":"03/05/2022"},{"startLocation":"Reykjavik, Iceland","endLocation":"Reykjavik, Iceland","startTime":"01/02/2020","endTime":"01/15/2020"},{"startLocation":"Tromso, Norway","endLocation":"Tromso, Norway","startTime":"01/02/2020","endTime":"01/09/2020"},{"startLocation":"Tromso, Norway","endLocation":"Longyearbyen, Svalbard","startTime":"02/24/2022","endTime":"03/05/2022"},{"startLocation":"Longyearbyen, Svalbard","endLocation":"Oslo, Norway","startTime":"01/02/2020","endTime":"01/15/2020"},{"startLocation":"Oslo, Norway","endLocation":"Reykjavik, Iceland","startTime":"02/02/2020","endTime":"02/15/2020"},{"startLocation":"Reykjavik, Iceland","endLocation":"Oslo, Norway","startTime":"01/02/2020","endTime":"01/15/2020"}];
 
@@ -59,15 +36,19 @@ export function generateRandomLatLong() {
 function App() {
   return (
     <div className="App">
-      <PrivacyPolicy />
-      <h1>Club Penguin</h1>
-      <section className='uploadFlow'>
-        {/* In live version the trip will be used to associate each photo timestamp with the corresponding geolocation */}
-        <TripList />
-        <PhotoUpload />
-      </section>
-      <Download />
-      <DataId />
+      <header>
+        <nav>
+          <div className='logo'>
+            <img src={picLogo} alt='Polar Identification Cache logo' />
+            <h3>Polar Identification Cache</h3>
+          </div>
+          <div className='links'>
+            <Link to='/'>Home</Link>
+            <Link to='/data'>View Data</Link>
+          </div>
+        </nav>
+      </header>
+      <Outlet />
     </div>
   );
 }
